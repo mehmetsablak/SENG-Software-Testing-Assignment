@@ -11,7 +11,6 @@
     </properties>
 
     <dependencies>
-        <!-- JUnit 5 (Jupiter) Test Kütüphaneleri -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -28,7 +27,6 @@
 
     <build>
         <plugins>
-            <!-- Komut satırından (ve Github Actions'tan) testleri çalıştırmak için gerekli eklenti -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

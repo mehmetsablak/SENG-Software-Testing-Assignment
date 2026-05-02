@@ -6,37 +6,37 @@ public class AccountRegistration {
     
     public String registerUser(String firstName, String lastName, String email, String dob, String password, String confirmPassword) {
         
-        // 1. İsim Kontrolleri (Equivalence Partitioning)
-        if (firstName == null || firstName.trim().isEmpty()) throw new IllegalArgumentException("İsim boş olamaz");
-        if (firstName.matches(".*\\d.*")) throw new IllegalArgumentException("İsim rakam içeremez");
+        // 1. Name Checks (Equivalence Partitioning)
+        if (firstName == null || firstName.trim().isEmpty()) throw new IllegalArgumentException("First name cannot be empty");
+        if (firstName.matches(".*\\d.*")) throw new IllegalArgumentException("First name cannot contain numbers");
 
-        // 2. E-posta Kontrolleri
-        if (email == null || !email.contains("@") || !email.contains(".")) throw new IllegalArgumentException("Geçersiz e-posta");
+        // 2. Email Checks
+        if (email == null || !email.contains("@") || !email.contains(".")) throw new IllegalArgumentException("Invalid email");
 
-        // 3. Şifre Uzunluğu Kontrolleri (Boundary Value Analysis)
-        if (password == null || password.trim().isEmpty()) throw new IllegalArgumentException("Şifre boş olamaz");
-        if (password.length() < 8) throw new IllegalArgumentException("Şifre en az 8 karakter olmalı");
+        // 3. Password Length Checks (Boundary Value Analysis)
+        if (password == null || password.trim().isEmpty()) throw new IllegalArgumentException("Password cannot be empty");
+        if (password.length() < 8) throw new IllegalArgumentException("Password must be at least 8 characters long");
 
-        // 4. Şifre Onay Kontrolü
-        if (confirmPassword == null || confirmPassword.trim().isEmpty()) throw new IllegalArgumentException("Şifre onayı boş olamaz");
-        if (!password.equals(confirmPassword)) throw new IllegalArgumentException("Şifreler uyuşmuyor");
+        // 4. Password Confirmation Check
+        if (confirmPassword == null || confirmPassword.trim().isEmpty()) throw new IllegalArgumentException("Confirm password cannot be empty");
+        if (!password.equals(confirmPassword)) throw new IllegalArgumentException("Passwords do not match");
 
-        // 5. Doğum Tarihi ve Yaş Kontrolü (Boundary Value Analysis)
+        // 5. Date of Birth and Age Check (Boundary Value Analysis)
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate birthDate = LocalDate.parse(dob, formatter);
             LocalDate today = LocalDate.now(); 
             
-            if (birthDate.isAfter(today)) throw new IllegalArgumentException("Doğum tarihi gelecek bir tarih olamaz");
+            if (birthDate.isAfter(today)) throw new IllegalArgumentException("Date of birth cannot be in the future");
             
             long age = ChronoUnit.YEARS.between(birthDate, today);
-            if (age < 18) throw new IllegalArgumentException("Yaş 18'den küçük olamaz");
+            if (age < 18) throw new IllegalArgumentException("Age cannot be under 18");
             
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException) throw e;
-            throw new IllegalArgumentException("Geçersiz tarih formatı, dd/MM/yyyy olmalı");
+            throw new IllegalArgumentException("Invalid date format, must be dd/MM/yyyy");
         }
         
-        return "Kayıt Başarılı";
+        return "Registration Successful";
     }
 }
