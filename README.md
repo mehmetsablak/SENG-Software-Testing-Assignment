@@ -10,8 +10,8 @@
 > *This project implements automated unit tests for an "Account Registration" module. It demonstrates the practical application of software verification and validation techniques[cite: 1].*
 
 ## 👥 Team Members
-* **Mehmet Sablak**
-* **Melike Miray Sarıkçıoğlu**
+* **Mehmet Sablak 231504811**
+* **Melike Miray Sarıkçıoğlu 231504034**
 
 ---
 
