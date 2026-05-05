@@ -1,6 +1,10 @@
 package com.assignment;
+
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AccountRegistrationTest {
 
@@ -20,7 +24,8 @@ public class AccountRegistrationTest {
     // --- VALID CASES (HAPPY PATH) ---
     @Test
     public void test01_ValidSubmission_ShouldPass() {
-        String result = registration.registerUser("Ali", "Veli", "ali@mail.com", "01/01/2000", "Password123", "Password123");
+        String exactly18Date = LocalDate.now().minusYears(18).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String result = registration.registerUser("Ali", "Veli", "ali@mail.com", exactly18Date, "Password123", "Password123");
         assertEquals("Registration Successful", result);
     }
 
@@ -33,17 +38,32 @@ public class AccountRegistrationTest {
     }
 
     @Test
-    public void test03_FirstNameWithNumbers_ShouldFail() {
+    public void test03_FirstNameWithNumbersOrSymbols_ShouldFail() {
         Exception e = assertThrows(IllegalArgumentException.class, () -> 
-            registration.registerUser("Ali123", "Veli", "a@m.com", "01/01/2000", "Pass1234", "Pass1234"));
-        assertEquals("First name cannot contain numbers", e.getMessage());
+            registration.registerUser("Ali123!", "Veli", "a@m.com", "01/01/2000", "Pass1234", "Pass1234"));
+        assertEquals("First name can only contain letters", e.getMessage());
     }
 
     @Test
     public void test04_FirstNameWithOnlySpaces_ShouldFail() {
         Exception e = assertThrows(IllegalArgumentException.class, () -> 
             registration.registerUser("   ", "Veli", "a@m.com", "01/01/2000", "Pass1234", "Pass1234"));
-        assertEquals("First name cannot be empty", e.getMessage());
+        assertEquals("First name cannot consist of only spaces", e.getMessage());
+    }
+
+    // --- LAST NAME TESTS (Equivalence Partitioning) ---
+    @Test
+    public void test16_EmptyLastName_ShouldFail() {
+        Exception e = assertThrows(IllegalArgumentException.class, () -> 
+            registration.registerUser("Ali", "", "a@m.com", "01/01/2000", "Pass1234", "Pass1234"));
+        assertEquals("Last name cannot be empty", e.getMessage());
+    }
+
+    @Test
+    public void test17_LastNameWithNumbersOrSymbols_ShouldFail() {
+        Exception e = assertThrows(IllegalArgumentException.class, () -> 
+            registration.registerUser("Ali", "Veli123!", "a@m.com", "01/01/2000", "Pass1234", "Pass1234"));
+        assertEquals("Last name can only contain letters", e.getMessage());
     }
 
     // --- EMAIL TESTS (Equivalence Partitioning) ---
@@ -106,14 +126,16 @@ public class AccountRegistrationTest {
 
     @Test
     public void test13_AgeUnder18_ShouldFail() { 
+        String under18Date = LocalDate.now().minusYears(17).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Exception e = assertThrows(IllegalArgumentException.class, () -> 
-            registration.registerUser("Ali", "Veli", "a@m.com", "01/05/2010", "Pass1234", "Pass1234"));
+            registration.registerUser("Ali", "Veli", "a@m.com", under18Date, "Pass1234", "Pass1234"));
         assertEquals("Age cannot be under 18", e.getMessage());
     }
 
     @Test
     public void test14_AgeExactly18_ShouldPass() { 
-        String result = registration.registerUser("Ali", "Veli", "a@m.com", "01/05/2008", "Pass1234", "Pass1234");
+        String exactly18Date = LocalDate.now().minusYears(18).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String result = registration.registerUser("Ali", "Veli", "a@m.com", exactly18Date, "Pass1234", "Pass1234");
         assertEquals("Registration Successful", result);
     }
 
