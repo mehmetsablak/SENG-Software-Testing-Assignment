@@ -16,7 +16,7 @@
 ---
 
 ## 🎯 Testing Techniques Applied
-To ensure robust validation, the following test design techniques were strictly applied[cite: 1]:
+To ensure robust validation, the following test design techniques were strictly applied:
 
 * 🔀 **Equivalence Partitioning (EP):** Used to test domains like valid/invalid email formats and name character rules.
 * 🚧 **Boundary Value Analysis (BVA):** Applied to critical edge cases such as the 18-year age limit and the minimum 8-character password requirement.
