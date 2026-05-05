@@ -7,16 +7,16 @@
   <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="Actions"/>
 </p>
 
-> *This project implements automated unit tests for an "Account Registration" module. It demonstrates the practical application of software verification and validation techniques[cite: 1].*
+> *This project implements automated unit tests for an "Account Registration" module. It demonstrates the practical application of software verification and validation techniques.*
 
 ## 👥 Team Members
-* **Mehmet Sablak**
-* **Melike Miray Sarıkçıoğlu**
+* **Mehmet Sablak 231504811**
+* **Melike Miray Sarıkçıoğlu 231504034**
 
 ---
 
 ## 🎯 Testing Techniques Applied
-To ensure robust validation, the following test design techniques were strictly applied[cite: 1]:
+To ensure robust validation, the following test design techniques were strictly applied:
 
 * 🔀 **Equivalence Partitioning (EP):** Used to test domains like valid/invalid email formats and name character rules.
 * 🚧 **Boundary Value Analysis (BVA):** Applied to critical edge cases such as the 18-year age limit and the minimum 8-character password requirement.
