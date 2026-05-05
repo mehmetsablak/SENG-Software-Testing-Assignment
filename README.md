@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="Actions"/>
 </p>
 
-> *This project implements automated unit tests for an "Account Registration" module. It demonstrates the practical application of software verification and validation techniques[cite: 1].*
+> *This project implements automated unit tests for an "Account Registration" module. It demonstrates the practical application of software verification and validation techniques.*
 
 ## 👥 Team Members
 * **Mehmet Sablak 231504811**
